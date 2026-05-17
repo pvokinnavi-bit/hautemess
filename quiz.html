@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест — HAUTE MESS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #1A1A1A; font-family: 'Arial Black', sans-serif; }
+        .page { max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        .back-link { display: inline-flex; align-items: center; gap: 10px; color: #7F7F7F; text-decoration: none; margin-bottom: 40px; font-family: 'Courier Prime', monospace; }
+        .back-link:hover { opacity: 0.7; }
+        h1 { font-size: 60px; color: #F5F5F0; margin-bottom: 30px; }
+        .quiz-card { background: #2A2A2A; padding: 30px; border-radius: 24px; }
+        .question { font-size: 24px; margin-bottom: 30px; color: #F5F5F0; }
+        .option { background: #1A1A1A; padding: 15px; border: 1px solid #444; border-radius: 48px; margin-bottom: 12px; cursor: pointer; transition: 0.2s; text-align: center; font-family: 'Courier Prime', monospace; color: #F5F5F0; }
+        .option:hover { background: #333; border-color: #F5F5F0; }
+        .result { text-align: center; }
+        .result-image { width: 100%; max-width: 300px; border-radius: 20px; margin: 20px auto; display: block; background: #7F7F7F; aspect-ratio: 1/1; object-fit: cover; }
+        .hidden { display: none; }
+        button { background: #F5F5F0; border: none; padding: 12px 30px; border-radius: 40px; font-family: 'Arial Black'; cursor: pointer; margin-top: 20px; }
+        @media (max-width: 700px) { h1 { font-size: 36px; } .question { font-size: 18px; } }
+    </style>
+</head>
+<body>
+<div class="page">
+    <a href="index.html" class="back-link">← НА ГЛАВНУЮ</a>
+    <h1>КТО ТЫ В МИРЕ МОДЫ?</h1>
+    <div class="quiz-card" id="quizApp"></div>
+</div>
+<script>
+    const questions = [
+        { text: "Твой идеальный показ — это...", options: ["Театр и хаос", "Минимализм и тишина", "Скандал и маски", "Уличная энергия"] },
+        { text: "Что ты ненавидишь больше всего?", options: ["Однообразие", "Плагиат", "Отсутствие смысла", "Экологическую безответственность"] },
+        { text: "Твоя любимая ткань?", options: ["Неопрен", "Шерсть", "Винтажная ткань", "Деним"] }
+    ];
+    const results = [
+        { name: "🔥 Мартин Маржела", desc: "Ты — анонимный гений. Любишь скрывать лица и разрушать шаблоны.", image: "pictures/margiela.jpg" },
+        { name: "🌀 Йоджи Ямамото", desc: "Твоя стихия — тишина и чёрный цвет. Ты создаёшь одежду-размышление.", image: "pictures/yohji.jpg" },
+        { name: "⚡ Александр Маккуин", desc: "Эмоции, театр и провокация — твоё всё. Ты умеешь шокировать со смыслом.", image: "pictures/mcqueen.jpg" },
+        { name: "🎧 Вирджил Абло", desc: "Уличная культура и высокое искусство. Ты ломаешь границы между люксом и стритвиром.", image: "pictures/virgil.jpg" }
+    ];
+    let step = 0, answers = [];
+    const app = document.getElementById('quizApp');
+    function render() {
+        if(step < questions.length) {
+            const q = questions[step];
+            app.innerHTML = `<div class="question">${q.text}</div>${q.options.map((opt, idx) => `<div class="option" data-idx="${idx}">${opt}</div>`).join('')}`;
+            document.querySelectorAll('.option').forEach(opt => opt.onclick = () => { answers.push(parseInt(opt.dataset.idx)); step++; render(); });
+        } else {
+            const final = answers.reduce((a,b) => a+b,0) % results.length;
+            const r = results[final];
+            app.innerHTML = `<div class="result"><div class="question">${r.name}</div><img src="${r.image}" class="result-image" onerror="this.style.display='none'"><p style="font-family:'Courier Prime'; color:#C0C0C0;">${r.desc}</p><button onclick="location.reload()">ПРОЙТИ ЗАНОВО</button></div>`;
+        }
+    }
+    render();
+</script>
+</body>
+</html>

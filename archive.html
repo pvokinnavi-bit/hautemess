@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Архив — HAUTE MESS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1A1A1A;
+            font-family: 'Arial Black', 'Arial', sans-serif;
+        }
+
+        .archive-page {
+            max-width: 1450px;
+            margin: 0 auto;
+            padding: 60px 20px 40px 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #7F7F7F;
+            text-decoration: none;
+            margin-bottom: 0px;
+            transform: translateY(-30px);
+            position: relative;
+            z-index: 10;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .back-arrow {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .back-text {
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            font-size: 24px;
+            color: #7F7F7F;
+        }
+
+        .archive-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+            transform: translateY(-30px);
+        }
+
+        .archive-header-left {
+            display: flex;
+            align-items: baseline;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .archive-header-left h1 {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 170px;
+            font-weight: 400;
+            color: #F5F5F0;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .folder-icon {
+            width: 140px;
+            height: 140px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .archive-sub {
+            font-family: 'Courier Prime', monospace;
+            font-size: 20px;
+            color: #7F7F7F;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .archive-block {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 80px;
+            align-items: flex-start;
+            padding-bottom: 60px;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #333;
+        }
+
+        .archive-block:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .archive-left {
+            flex: 1;
+            min-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            position: relative;
+        }
+
+        .image-container {
+            position: relative;
+            width: 100%;
+            max-width: 726px;
+        }
+
+        .archive-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .favorite-icon {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            width: 40px;
+            height: 40px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            cursor: pointer;
+            transition: opacity 0.3s, filter 0.2s;
+            z-index: 5;
+        }
+
+        .favorite-icon:hover {
+            opacity: 0.7;
+        }
+
+        .favorite-icon.active {
+            filter: drop-shadow(0 0 4px gold);
+        }
+
+        .item-link-wrapper {
+            text-align: center;
+            width: 100%;
+            max-width: 726px;
+        }
+
+        .item-link {
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            font-size: 60px;
+            font-weight: 400;
+            color: #F5F5F0;
+            text-decoration: none;
+            display: inline-block;
+            transition: opacity 0.3s;
+            padding-bottom: 5px;
+        }
+
+        .item-link:hover {
+            opacity: 0.7;
+        }
+
+        .archive-info {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .item-number {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 50px;
+            font-weight: 400;
+            color: #F5F5F0;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .item-designer {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 50px;
+            font-weight: 400;
+            color: #F5F5F0;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .item-season {
+            font-family: 'Impact', 'Arial Black', sans-serif;
+            font-size: 50px;
+            font-weight: 400;
+            color: #F5F5F0;
+            line-height: 1;
+            margin-bottom: 40px;
+        }
+
+        .item-description {
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            font-size: 36px;
+            font-weight: 400;
+            color: #F5F5F0;
+            line-height: 1.3;
+            max-width: 600px;
+        }
+
+        .next-page {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 40;
+            border-top: none;
+            transform: translateY(-15px);
+        }
+
+        .next-page-link {
+            display: flex;
+            align-items: center;
+            gap: 2px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .next-page-link:hover {
+            opacity: 0.7;
+        }
+
+        .next-page-text {
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            font-size: 16px;
+            color: #7F7F7F;
+        }
+
+        .next-page-icon {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+        .generator-teaser {
+            text-align: center;
+            margin: 60px 0 40px;
+            padding: 40px 20px;
+            background: #2A2A2A;
+            border-radius: 32px;
+        }
+
+        .generator-teaser .section-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        @media screen and (max-width: 1200px) {
+            .archive-header-left h1 { font-size: 120px; }
+            .folder-icon { width: 110px; height: 110px; }
+            .item-number, .item-designer, .item-season { font-size: 45px; }
+            .item-link { font-size: 50px; }
+            .item-description { font-size: 30px; }
+        }
+
+        @media screen and (max-width: 900px) {
+            .archive-page { padding: 40px 20px 80px 20px; }
+            .archive-header-left h1 { font-size: 80px; }
+            .folder-icon { width: 80px; height: 80px; }
+            .archive-block { gap: 40px; padding-bottom: 40px; margin-bottom: 40px; }
+            .item-number, .item-designer, .item-season { font-size: 40px; }
+            .item-link { font-size: 45px; }
+            .item-description { font-size: 28px; max-width: 100%; text-align: center; }
+            .archive-info { text-align: center; }
+        }
+
+        @media screen and (max-width: 700px) {
+            .archive-page { padding: 30px 15px 60px 15px; }
+            .back-link { margin-bottom: 40px; }
+            .back-text { font-size: 18px; }
+            .back-arrow { width: 30px; height: 30px; }
+            .archive-header { flex-direction: column; align-items: flex-start; gap: 20px; margin-bottom: 40px; }
+            .archive-header-left { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .archive-header-left h1 { font-size: 48px; }
+            .folder-icon { width: 50px; height: 50px; }
+            .archive-sub { font-size: 16px; margin-top: 10px; }
+            .archive-block { flex-direction: column; gap: 30px; padding-bottom: 30px; margin-bottom: 30px; }
+            .item-number, .item-designer, .item-season { font-size: 32px; }
+            .item-link { font-size: 38px; }
+            .item-description { font-size: 22px; }
+            .favorite-icon { width: 30px; height: 30px; top: 10px; left: 10px; }
+            .next-page { margin-top: 10px; }
+            .next-page-text { font-size: 14px; }
+            .next-page-icon { width: 25px; height: 25px; }
+            .generator-teaser .section-title { font-size: 28px; }
+            .generator-teaser a { font-size: 32px !important; }
+        }
+
+        @media screen and (max-width: 480px) {
+            .archive-header-left h1 { font-size: 32px; }
+            .folder-icon { width: 40px; height: 40px; }
+            .item-number, .item-designer, .item-season { font-size: 28px; }
+            .item-link { font-size: 32px; }
+            .item-description { font-size: 18px; }
+            .favorite-icon { width: 25px; height: 25px; top: 8px; left: 8px; }
+            .next-page-text { font-size: 12px; }
+            .next-page-icon { width: 20px; height: 20px; }
+            .generator-teaser .section-title { font-size: 24px; }
+            .generator-teaser a { font-size: 28px !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="archive-page">
+        <a href="index.html" class="back-link">
+            <img src="pictures/arrow-back.png" alt="←" class="back-arrow">
+            <span class="back-text">НА ГЛАВНУЮ</span>
+        </a>
+
+        <div class="archive-header">
+            <div class="archive-header-left">
+                <div style="display: flex; align-items: center; gap: 30px; flex-wrap: wrap;">
+                    <h1>АРХИВ</h1>
+                    <div class="folder-icon" style="background-image: url('pictures/file.png');"></div>
+                </div>
+                <div class="archive-sub">избранное, коллекции, редкости</div>
+            </div>
+        </div>
+
+        <!-- БЛОК 1 -->
+        <div class="archive-block">
+            <div class="archive-left">
+                <div class="image-container">
+                    <img src="pictures/yohji_1999.jpg" alt="Yohji Yamamoto SS 1999" class="archive-img">
+                    <div class="favorite-icon" data-id="001" style="background-image: url('pictures/favorite-icon.png');"></div>
+                </div>
+                <div class="item-link-wrapper">
+                    <a href="#" class="item-link">[EXPLORE]</a>
+                </div>
+            </div>
+            <div class="archive-info">
+                <div class="item-number">№001</div>
+                <div class="item-designer">Yohji Yamamoto</div>
+                <div class="item-season">SS 1999</div>
+                <div class="item-description">
+                    Объявили оскорблением публики и смертью театральности.<br>
+                    Оказалось, что самый радикальный жест - тишина.<br><br>
+                    Вешалка как манифест против конвейера образов.
+                </div>
+            </div>
+        </div>
+
+        <!-- БЛОК 2 -->
+        <div class="archive-block">
+            <div class="archive-left">
+                <div class="image-container">
+                    <img src="pictures/comme_1997.jpg" alt="Comme des Garcons SS 1997" class="archive-img">
+                    <div class="favorite-icon" data-id="002" style="background-image: url('pictures/favorite-icon.png');"></div>
+                </div>
+                <div class="item-link-wrapper">
+                    <a href="#" class="item-link">[EXPLORE]</a>
+                </div>
+            </div>
+            <div class="archive-info">
+                <div class="item-number">№002</div>
+                <div class="item-designer">Comme des Garcons</div>
+                <div class="item-season">SS 1997</div>
+                <div class="item-description">
+                    Коллекция, которую назвали "уродливой".<br>
+                    Переопределила силуэт и эстетику 2000-х.
+                </div>
+            </div>
+        </div>
+
+        <!-- БЛОК 3 -->
+        <div class="archive-block">
+            <div class="archive-left">
+                <div class="image-container">
+                    <img src="pictures/kiko_2020.jpg" alt="Kiko Kostadinov FW 2020" class="archive-img">
+                    <div class="favorite-icon" data-id="003" style="background-image: url('pictures/favorite-icon.png');"></div>
+                </div>
+                <div class="item-link-wrapper">
+                    <a href="#" class="item-link">[EXPLORE]</a>
+                </div>
+            </div>
+            <div class="archive-info">
+                <div class="item-number">№003</div>
+                <div class="item-designer">Kiko Kostadinov</div>
+                <div class="item-season">FW 2020</div>
+                <div class="item-description">
+                    Сочли ошибкой и отсутствием женственности.<br>
+                    Через год его инженерный крой копировала вся индустрия.<br><br>
+                    Классический случай присвоения инновации без упоминания автора.
+                </div>
+            </div>
+        </div>
+
+        <!-- БЛОК 4 -->
+        <div class="archive-block">
+            <div class="archive-left">
+                <div class="image-container">
+                    <img src="pictures/margiela_1990.jpg" alt="Martin Margiela SS 1990" class="archive-img">
+                    <div class="favorite-icon" data-id="004" style="background-image: url('pictures/favorite-icon.png');"></div>
+                </div>
+                <div class="item-link-wrapper">
+                    <a href="#" class="item-link">[EXPLORE]</a>
+                </div>
+            </div>
+            <div class="archive-info">
+                <div class="item-number">№004</div>
+                <div class="item-designer">Martin Margiela</div>
+                <div class="item-season">SS 1990</div>
+                <div class="item-description">
+                    Осмеяли за "боязнь лиц" и неуважение к модели.<br><br>
+                    Создал главную икону анонимности в эпоху нарциссизма.<br>
+                    Маска стала более узнаваемой, чем любое лицо.
+                </div>
+            </div>
+        </div>
+
+        <!-- БЛОК ГЕНЕРАТОРА -->
+        <div class="generator-teaser">
+            <div class="section-title">🎲 ЭКСПЕРИМЕНТИРУЙ</div>
+            <div class="description" style="margin-bottom: 20px; color: #C0C0C0; font-family: 'Courier Prime', monospace;">Собери свой дерзкий лук. Сломай силуэт.</div>
+            <a href="generator.html" class="item-link" style="font-size: 50px;">[ПОПРОБОВАТЬ]</a>
+        </div>
+
+        <div class="next-page">
+            <a href="analytics.html" class="next-page-link">
+                <span class="next-page-text">СЛЕДУЮЩАЯ СТРАНИЦА</span>
+                <img src="pictures/arrow-icon.png" alt="→" class="next-page-icon">
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.querySelectorAll('.favorite-icon').forEach(icon => {
+            icon.addEventListener('click', function(e) {
+                e.preventDefault();
+                e.stopPropagation();
+                this.classList.toggle('active');
+                const id = this.dataset.id;
+                if (this.classList.contains('active')) {
+                    localStorage.setItem(`fav_${id}`, 'true');
+                } else {
+                    localStorage.removeItem(`fav_${id}`);
+                }
+            });
+            const id = icon.dataset.id;
+            if (localStorage.getItem(`fav_${id}`) === 'true') {
+                icon.classList.add('active');
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>О проекте — HAUTE MESS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1A1A1A;
+            font-family: 'Arial Black', 'Arial', sans-serif;
+        }
+
+        .about-page {
+            max-width: 1450px;
+            margin: 0 auto;
+            padding: 0 20px 80px 20px;
+        }
+
+        /* НАВИГАЦИЯ НАЗАД */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #7F7F7F;
+            text-decoration: none;
+            margin: 40px 0;
+            transition: opacity 0.3s;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .back-arrow {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .back-text {
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            font-size: 24px;
+            color: #7F7F7F;
+        }
+
+        /* ПЕРВАЯ КАРТИНКА С ЗАГОЛОВКОМ */
+        .hero-about {
+            position: relative;
+            width: 100%;
+            margin-bottom: 80px;
+        }
+
+        .hero-about img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .hero-title {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            text-align: left;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 170px;
+            color: #F5F5F0;
+            letter-spacing: -0.02em;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            padding-left: 40px;
+        }
+
+        /* ОСНОВНОЙ ТЕКСТ (ПО ЛЕВОМУ КРАЮ, ОГРАНИЧЕН ПО ШИРИНЕ) */
+        .about-text {
+            max-width: 1367px;
+            margin: 0 auto 80px 0;
+            font-family: 'Courier Prime', monospace;
+            font-size: 48px;
+            color: #C0C0C0;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        .about-text p {
+            margin-bottom: 40px;
+        }
+
+        .about-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        .about-text strong {
+            font-family: 'Arial Black', sans-serif;
+            font-weight: 400;
+            font-size: 60px;
+            color: #F5F5F0;
+        }
+
+        /* БЛОК БЛАГОДАРНОСТИ С КАРТИНКОЙ */
+        .thanks-section {
+            position: relative;
+            width: 100%;
+            margin-bottom: 80px;
+        }
+
+        .thanks-section img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .thanks-title {
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            text-align: left;
+            font-family: 'Arial Black', sans-serif;
+            font-size: 100px;
+            color: #F5F5F0;
+            letter-spacing: -0.02em;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+            padding-left: 40px;
+        }
+
+        /* ТЕКСТ БЛАГОДАРНОСТИ — ВЕСЬ 32px */
+        .thanks-text {
+            max-width: 1367px;
+            margin: 0 auto 60px 0;
+            font-family: 'Courier Prime', monospace;
+            font-size: 32px;
+            color: #C0C0C0;
+            line-height: 1.4;
+            text-align: left;
+        }
+
+        .thanks-text p {
+            margin-bottom: 30px;
+        }
+
+        .thanks-text p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* БЛОК ВДОХНОВИТЕЛЯ (КОТ МАРКУС) */
+        .inspiration {
+            max-width: 1367px;
+            margin: 80px 0 60px 0;
+            padding: 40px;
+            background: rgba(255,255,255,0.03);
+            border-left: 4px solid #F5F5F0;
+        }
+
+        .inspiration-title {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 28px;
+            color: #F5F5F0;
+            margin-bottom: 20px;
+            letter-spacing: 1px;
+        }
+
+        .inspiration-text {
+            font-family: 'Courier Prime', monospace;
+            font-size: 20px;
+            color: #C0C0C0;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .inspiration-link {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 20px;
+            color: #F5F5F0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.3s;
+            border-bottom: 1px solid #F5F5F0;
+            padding-bottom: 4px;
+        }
+
+        .inspiration-link:hover {
+            opacity: 0.7;
+        }
+
+        /* ПОДПИСЬ ВНИЗУ СПРАВА */
+        .signature {
+            font-family: 'Courier Prime', monospace;
+            font-size: 32px;
+            color: #F5F5F0;
+            text-align: right;
+            margin-top: 200px;
+            line-height: 1.4;
+        }
+
+        .signature strong {
+            font-family: 'Arial Black', sans-serif;
+            font-weight: 400;
+        }
+
+        /* АДАПТИВ */
+        @media screen and (max-width: 1200px) {
+            .hero-title { font-size: 120px; }
+            .thanks-title { font-size: 80px; }
+            .about-text { font-size: 36px; }
+            .about-text strong { font-size: 48px; }
+            .thanks-text { font-size: 28px; }
+            .inspiration-text { font-size: 18px; }
+            .about-text, .thanks-text, .inspiration { max-width: 100%; }
+            .signature { font-size: 28px; margin-top: 150px; }
+        }
+
+        @media screen and (max-width: 900px) {
+            .hero-title { font-size: 80px; bottom: 15px; padding-left: 20px; }
+            .thanks-title { font-size: 60px; padding-left: 20px; }
+            .about-text { font-size: 28px; }
+            .about-text strong { font-size: 36px; }
+            .thanks-text { font-size: 24px; }
+            .inspiration-title { font-size: 24px; }
+            .inspiration-text { font-size: 16px; }
+            .inspiration-link { font-size: 18px; }
+            .signature { font-size: 24px; margin-top: 120px; }
+        }
+
+        @media screen and (max-width: 700px) {
+            .back-text { font-size: 18px; }
+            .back-arrow { width: 30px; height: 30px; }
+            .hero-title { font-size: 48px; }
+            .thanks-title { font-size: 36px; }
+            .about-text { font-size: 20px; }
+            .about-text strong { font-size: 28px; }
+            .thanks-text { font-size: 18px; }
+            .inspiration { padding: 25px; margin: 50px 0 40px 0; }
+            .inspiration-title { font-size: 20px; }
+            .inspiration-text { font-size: 14px; }
+            .inspiration-link { font-size: 16px; }
+            .signature { font-size: 20px; margin-top: 100px; }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero-title { font-size: 32px; }
+            .thanks-title { font-size: 24px; }
+            .about-text { font-size: 16px; }
+            .about-text strong { font-size: 22px; }
+            .thanks-text { font-size: 14px; }
+            .inspiration { padding: 20px; }
+            .inspiration-title { font-size: 18px; }
+            .inspiration-text { font-size: 12px; }
+            .inspiration-link { font-size: 14px; }
+            .signature { font-size: 16px; margin-top: 80px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="about-page">
+        <!-- ССЫЛКА НАЗАД -->
+        <a href="index.html" class="back-link">
+            <img src="pictures/arrow-back.png" alt="←" class="back-arrow">
+            <span class="back-text">НА ГЛАВНУЮ</span>
+        </a>
+
+        <!-- ПЕРВАЯ КАРТИНКА С ЗАГОЛОВКОМ -->
+        <div class="hero-about">
+            <img src="pictures/about-hero.jpg" alt="О проекте">
+            <div class="hero-title">О ПРОЕКТЕ</div>
+        </div>
+
+        <!-- ОСНОВНОЙ ТЕКСТ -->
+        <div class="about-text">
+            <p><strong>Haute Mess</strong> — это архив моды, которую не поняли или не приняли. Платформа, посвящённая модным коллекциям, которые в момент своего появления вызвали скандал, были осмеяны и названы безвкусицей. Лишь для того, чтобы годы спустя их идеи украли, упростили и выдали за «новый» тренд.</p>
+            <p>Мы не просто каталогизируем скандалы — мы проводим реабилитацию. Показываем, как эти «провалы» на десятилетия определили вектор развития всей индустрии. Через глубокий анализ, исторический контекст и, да, здоровую дозу иронии над слепотой современников.</p>
+            <p>Это пространство для тех, кто сомневается в официальной истории моды. Для ценителей, способных разглядеть гений в хаосе. Для тех, кто знает, что настоящее признание приходит с опозданием. Иногда — на целую эпоху.</p>
+            <p>Наша миссия — сократить это ожидание и восстановить связь между бунтом и его наследием.</p>
+        </div>
+
+        <!-- БЛОК БЛАГОДАРНОСТИ С КАРТИНКОЙ -->
+        <div class="thanks-section">
+            <img src="pictures/about-thanks.jpg" alt="Благодарности">
+            <div class="thanks-title">БЛАГОДАРНОСТИ</div>
+        </div>
+
+        <!-- ТЕКСТ БЛАГОДАРНОСТИ -->
+        <div class="thanks-text">
+            <p>Этот архив был бы невозможен без смелости дизайнеров-визионеров, которые пошли ва-банк и проиграли. По всем меркам своего времени.</p>
+            <p>Мы в долгу перед историками моды и критиками, которые ошиблись — ваши разгромные рецензии стали для нас бесценными историческими материалами.</p>
+            <p>И, конечно, отдельная благодарность индустрии, которая всё украла — без вашего позднего «озарения» этот архив потерял бы половину смысла.</p>
+            <p>Но главная благодарность — Вам. За то, что сомневаетесь в официальной версии истории и видите гений там, где другие видели провал.</p>
+        </div>
+
+        <!-- БЛОК ВДОХНОВИТЕЛЯ (КОТ МАРКУС) -->
+        <div class="inspiration">
+            <div class="inspiration-title">ГЛАВНЫЙ ВДОХНОВИТЕЛЬ</div>
+            <div class="inspiration-text">
+                HAUTE MESS — это не только скандальные коллекции и модные разборы. 
+                За кулисами проекта стоит тот, кто не признаёт правил, спит на подушке и вдохновляет на хаос. 
+                Встречайте — креативный директор отдела хаоса, кот Маркус.
+            </div>
+            <a href="marcus.html" class="inspiration-link">→ ПОЗНАКОМИТЬСЯ</a>
+        </div>
+
+        <!-- ПОДПИСЬ ВНИЗУ СПРАВА -->
+        <div class="signature">
+            Искренне, команда<br>
+            <strong>Haute Mess</strong>.
+        </div>
+    </div>
+</body>
+</html>

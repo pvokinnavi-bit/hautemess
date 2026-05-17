@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Колонка — HAUTE MESS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1A1A1A;
+            font-family: 'Arial Black', 'Arial', sans-serif;
+        }
+
+        .column-page {
+            max-width: 1450px;
+            margin: 0 auto;
+            padding: 60px 20px 40px 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #7F7F7F;
+            text-decoration: none;
+            margin-bottom: 0px;
+            transform: translateY(-30px);
+            position: relative;
+            z-index: 10;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .back-arrow {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .back-text {
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            font-size: 24px;
+            color: #7F7F7F;
+        }
+
+        .column-header {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+            transform: translateY(-30px);
+        }
+
+        .column-header h1 {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 170px;
+            font-weight: 400;
+            color: #F5F5F0;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .column-sub {
+            font-family: 'Courier Prime', monospace;
+            font-size: 20px;
+            color: #7F7F7F;
+        }
+
+        .column-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px 80px;
+            margin-bottom: 80px;
+        }
+
+        .column-card {
+            border-bottom: 1px solid #333;
+            padding-bottom: 40px;
+        }
+
+        .column-card:nth-last-child(-n+2) {
+            border-bottom: none;
+        }
+
+        .column-image {
+            margin-bottom: 20px;
+            width: 100%;
+            aspect-ratio: 16 / 3;
+            overflow: hidden;
+        }
+
+        .column-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .column-meta {
+            margin-bottom: 15px;
+        }
+
+        .column-date {
+            font-family: 'Courier Prime', monospace;
+            font-size: 14px;
+            color: #7F7F7F;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .column-author {
+            font-family: 'Courier Prime', monospace;
+            font-size: 14px;
+            color: #7F7F7F;
+            margin-top: 5px;
+            font-style: italic;
+        }
+
+        .column-title {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 28px;
+            font-weight: 400;
+            color: #F5F5F0;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            cursor: default;
+        }
+
+        .column-description {
+            font-family: 'Courier Prime', monospace;
+            font-size: 15px;
+            color: #C0C0C0;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .column-link {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 18px;
+            color: #F5F5F0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.3s;
+            border-bottom: 1px solid #F5F5F0;
+            padding-bottom: 3px;
+        }
+
+        .column-link:hover {
+            opacity: 0.7;
+        }
+
+        /* ПРАВАЯ КОЛОНКА ДЛЯ ТЕСТА */
+        .column-right {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 80px;
+        }
+
+        .test-card {
+            background: rgba(255,255,255,0.03);
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .test-card .activity-title {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 20px;
+            font-weight: 400;
+            color: #F5F5F0;
+            margin-bottom: 15px;
+        }
+
+        .test-card .activity-description {
+            font-family: 'Courier Prime', monospace;
+            font-size: 14px;
+            color: #C0C0C0;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .test-card .activity-link {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 16px;
+            color: #F5F5F0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: opacity 0.3s;
+            border-bottom: 1px solid #F5F5F0;
+            padding-bottom: 3px;
+        }
+
+        .test-card .activity-link:hover {
+            opacity: 0.7;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 20px;
+            padding-top: 30px;
+            border-top: 1px solid #333;
+        }
+
+        .pagination-link {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 16px;
+            color: #7F7F7F;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pagination-link:hover {
+            opacity: 0.7;
+            color: #F5F5F0;
+        }
+
+        .pagination-icon {
+            width: 25px;
+            height: 25px;
+            object-fit: contain;
+        }
+
+        @media screen and (max-width: 1200px) {
+            .column-header h1 { font-size: 120px; }
+            .column-title { font-size: 32px; }
+        }
+
+        @media screen and (max-width: 1000px) {
+            .column-header h1 { font-size: 100px; }
+            .column-grid { gap: 40px; }
+            .column-title { font-size: 28px; }
+        }
+
+        @media screen and (max-width: 900px) {
+            .column-page { padding: 40px 20px 80px 20px; }
+            .column-header h1 { font-size: 80px; }
+            .column-title { font-size: 26px; }
+        }
+
+        @media screen and (max-width: 800px) {
+            .column-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+            .column-card {
+                border-bottom: 1px solid #333;
+                padding-bottom: 40px;
+            }
+            .column-card:nth-last-child(-n+2) {
+                border-bottom: 1px solid #333;
+            }
+            .column-card:last-child {
+                border-bottom: none;
+            }
+            .column-right {
+                margin-top: 20px;
+            }
+        }
+
+        @media screen and (max-width: 700px) {
+            .column-page { padding: 30px 15px 60px 15px; }
+            .back-link { margin-bottom: 40px; }
+            .back-text { font-size: 18px; }
+            .back-arrow { width: 30px; height: 30px; }
+            .column-header h1 { font-size: 48px; }
+            .column-sub { font-size: 16px; }
+            .column-title { font-size: 22px; }
+            .column-description { font-size: 14px; }
+            .column-link { font-size: 16px; }
+            .pagination-link { font-size: 14px; }
+            .pagination-icon { width: 20px; height: 20px; }
+            .column-image { aspect-ratio: 16 / 4; }
+        }
+
+        @media screen and (max-width: 480px) {
+            .column-header h1 { font-size: 32px; }
+            .column-title { font-size: 20px; }
+            .column-description { font-size: 13px; }
+            .column-date, .column-author { font-size: 12px; }
+            .column-image { aspect-ratio: 16 / 3; }
+        }
+    </style>
+</head>
+<body>
+    <div class="column-page">
+        <a href="index.html" class="back-link">
+            <img src="pictures/arrow-back.png" alt="←" class="back-arrow">
+            <span class="back-text">НА ГЛАВНУЮ</span>
+        </a>
+
+        <div class="column-header">
+            <h1>КОЛОНКА</h1>
+            <div class="column-sub">мнение, рефлексия, позиция</div>
+        </div>
+
+        <div class="column-grid">
+            <!-- КАРТОЧКА 1 -->
+            <div class="column-card">
+                <div class="column-image">
+                    <img src="pictures/column1.jpg" alt="Second hand" class="column-img">
+                </div>
+                <div class="column-meta">
+                    <div class="column-date">АПРЕЛЬ 2025</div>
+                    <div class="column-author">Мартин Эдвардс</div>
+                </div>
+                <div class="column-title">Почему секонд-хенды — мастхев для настоящих модников</div>
+                <div class="column-description">Как вещи с чужого плеча становятся главным инструментом построения уникального образа. Расследование: почему масс-маркет проигрывает винтажу.</div>
+                <a href="#" class="column-link">ЧИТАТЬ →</a>
+            </div>
+
+            <!-- КАРТОЧКА 2 -->
+            <div class="column-card">
+                <div class="column-image">
+                    <img src="pictures/column2.jpg" alt="Grandma's wardrobe" class="column-img">
+                </div>
+                <div class="column-meta">
+                    <div class="column-date">МАРТ 2025</div>
+                    <div class="column-author">Юн Кихо</div>
+                </div>
+                <div class="column-title">Что можно найти, если порыться в шкафу вашей бабушки</div>
+                <div class="column-description">Дизайнерские платья, болоньевые куртки и украшения 80-х. Почему самое ценное в моде — не новые коллекции, а забытые реликвии старшего поколения.</div>
+                <a href="#" class="column-link">ЧИТАТЬ →</a>
+            </div>
+
+            <!-- КАРТОЧКА 3 -->
+            <div class="column-card">
+                <div class="column-image">
+                    <img src="pictures/column3.jpg" alt="Street to runway" class="column-img">
+                </div>
+                <div class="column-meta">
+                    <div class="column-date">ФЕВРАЛЬ 2025</div>
+                    <div class="column-author">Гений тысячелетия</div>
+                </div>
+                <div class="column-title">От граффити до собственной коллекции: путь дизайнера из Гонконга</div>
+                <div class="column-description">Как уличный художник, разрисовавший стены заброшенных фабрик, попал на неделю моды в Париже и основал бренд с шестизначными оборотами.</div>
+                <a href="#" class="column-link">ЧИТАТЬ →</a>
+            </div>
+
+            <!-- КАРТОЧКА 4 -->
+            <div class="column-card">
+                <div class="column-image">
+                    <img src="pictures/column4.jpg" alt="Streetwear" class="column-img">
+                </div>
+                <div class="column-meta">
+                    <div class="column-date">ЯНВАРЬ 2025</div>
+                    <div class="column-author">Истинный рэпер Ким Чонсоб</div>
+                </div>
+                <div class="column-title">Он торговал редкими кроссовками, чтобы основать собственный бренд</div>
+                <div class="column-description">История человека, который начал с перепродажи лимитированных изданий на барахолке, а закончил собственным производством и коллаборацией с Nike.</div>
+                <a href="#" class="column-link">ЧИТАТЬ →</a>
+            </div>
+
+            <!-- КАРТОЧКА 5 -->
+            <div class="column-card">
+                <div class="column-image">
+                    <img src="pictures/column5.jpg" alt="Dance machine" class="column-img">
+                </div>
+                <div class="column-meta">
+                    <div class="column-date">ДЕКАБРЬ 2024</div>
+                    <div class="column-author">Дэнс машина</div>
+                </div>
+                <div class="column-title">Почему уличная мода и хип-хоп неразделимы</div>
+                <div class="column-description">Как мешковатые штаны, бейсболки и массивные кроссовки из гетто стали главным dress-кодом мировой молодёжи.</div>
+                <a href="#" class="column-link">ЧИТАТЬ →</a>
+            </div>
+
+            <!-- КАРТОЧКА 6 -->
+            <div class="column-card">
+                <div class="column-image">
+                    <img src="pictures/column6.jpg" alt="Break dance" class="column-img">
+                </div>
+                <div class="column-meta">
+                    <div class="column-date">НОЯБРЬ 2024</div>
+                    <div class="column-author">Король хип-хопа и нижнего брейка</div>
+                </div>
+                <div class="column-title">От подвала до подиума: как брейк-данс изменил моду на уличную одежду</div>
+                <div class="column-description">Рассказ о том, почему удобные штаны и кроссовки стали символом целой эпохи и как танцоры диктовали тренды уличным брендам.</div>
+                <a href="#" class="column-link">ЧИТАТЬ →</a>
+            </div>
+        </div>
+
+        <!-- ПРАВАЯ КОЛОНКА: ТЕСТ -->
+        <div class="column-right">
+            <div class="test-card">
+                <div class="activity-title">🧠 КАКОЙ ТЫ ДИЗАЙНЕР?</div>
+                <div class="activity-description">Пройди тест и узнай, кто ты в мире моды — Маржела, Маккуин или Ямамото.</div>
+                <a href="quiz.html" class="activity-link">ПРОЙТИ ТЕСТ →</a>
+            </div>
+        </div>
+
+        <div class="pagination">
+            <a href="research.html" class="pagination-link">
+                <img src="pictures/arrow-icon.png" alt="←" class="pagination-icon" style="transform: rotate(180deg);">
+                ПРЕДЫДУЩАЯ
+            </a>
+            <a href="community.html" class="pagination-link">
+                СЛЕДУЮЩАЯ
+                <img src="pictures/arrow-icon.png" alt="→" class="pagination-icon">
+            </a>
+        </div>
+    </div>
+</body>
+</html>

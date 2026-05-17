@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея — HAUTE MESS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1A1A1A;
+            font-family: 'Arial Black', 'Arial', sans-serif;
+        }
+
+        .page {
+            max-width: 1400px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            color: #7F7F7F;
+            text-decoration: none;
+            margin-bottom: 40px;
+            transition: opacity 0.3s;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        h1 {
+            font-size: 80px;
+            color: #F5F5F0;
+            border-bottom: 1px solid #333;
+            padding-bottom: 20px;
+            margin-bottom: 30px;
+            letter-spacing: -0.02em;
+        }
+
+        .description {
+            font-family: 'Courier Prime', monospace;
+            font-size: 16px;
+            color: #7F7F7F;
+            margin-bottom: 40px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .gallery-card {
+            background: #2A2A2A;
+            border-radius: 20px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: 0.2s ease;
+        }
+
+        .gallery-card:hover {
+            background: #333;
+        }
+
+        .gallery-image {
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            object-fit: cover;
+            display: block;
+            background: #3A3A3A;
+        }
+
+        .card-info {
+            padding: 20px;
+        }
+
+        .card-title {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 20px;
+            color: #F5F5F0;
+            margin-bottom: 8px;
+        }
+
+        .card-year {
+            font-family: 'Courier Prime', monospace;
+            font-size: 12px;
+            color: #00ffcc;
+            letter-spacing: 1px;
+        }
+
+        /* МОДАЛЬНОЕ ОКНО (БЕЗ КАРТИНКИ) */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 30px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            max-width: 800px;
+            width: 100%;
+            background: #1A1A1A;
+            border: 1px solid #333;
+            border-radius: 32px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .modal-close {
+            position: sticky;
+            top: 15px;
+            right: 0;
+            float: right;
+            font-size: 35px;
+            color: #F5F5F0;
+            cursor: pointer;
+            transition: 0.2s;
+            z-index: 10;
+            background: #1A1A1A;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 10px 10px 0 0;
+        }
+
+        .modal-close:hover {
+            color: #ff00cc;
+            background: #2A2A2A;
+        }
+
+        .modal-text {
+            padding: 30px;
+            clear: both;
+        }
+
+        .modal-title {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 32px;
+            color: #F5F5F0;
+            margin-bottom: 10px;
+        }
+
+        .modal-year {
+            font-family: 'Courier Prime', monospace;
+            font-size: 14px;
+            color: #00ffcc;
+            margin-bottom: 20px;
+        }
+
+        .modal-scan {
+            font-family: 'Courier Prime', monospace;
+            font-size: 16px;
+            color: #C0C0C0;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-quote {
+            font-family: 'Courier Prime', monospace;
+            font-size: 14px;
+            color: #7F7F7F;
+            font-style: italic;
+            border-left: 3px solid #ff00cc;
+            padding-left: 15px;
+            margin: 20px 0;
+        }
+
+        .like-btn {
+            background: none;
+            border: 1px solid #444;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 14px;
+            color: #F5F5F0;
+            cursor: pointer;
+            transition: 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .like-btn:hover {
+            border-color: #ff00cc;
+            color: #ff00cc;
+        }
+
+        .like-btn.liked {
+            border-color: #ff00cc;
+            background: rgba(255, 0, 204, 0.1);
+            color: #ff00cc;
+        }
+
+        @media (max-width: 700px) {
+            h1 { font-size: 48px; }
+            .modal-title { font-size: 24px; }
+            .modal-scan { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+<div class="page">
+    <a href="index.html" class="back-link">← НА ГЛАВНУЮ</a>
+    <h1>ЗАПРЕЩЁННЫЕ ОБРАЗЫ</h1>
+    <div class="description">
+        📸 Коллекции, которые сначала осмеяли, а потом признали гениальными.<br>
+        Листай, нажимай, забирай в избранное.
+    </div>
+    <div class="gallery-grid" id="galleryGrid"></div>
+</div>
+
+<!-- МОДАЛЬНОЕ ОКНО (БЕЗ КАРТИНКИ) -->
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <span class="modal-close" id="modalClose">&times;</span>
+        <div class="modal-text">
+            <div class="modal-title" id="modalTitle"></div>
+            <div class="modal-year" id="modalYear"></div>
+            <div class="modal-scan" id="modalScan"></div>
+            <div class="modal-quote" id="modalQuote"></div>
+            <button class="like-btn" id="modalLike">♡ ЛАЙК</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function getPlaceholderSVG(text) {
+        return `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='500' viewBox='0 0 400 500'%3E%3Crect width='400' height='500' fill='%232A2A2A'/%3E%3Ctext x='50%25' y='50%25' font-family='Courier New' font-size='20' fill='%237F7F7F' text-anchor='middle' dy='.3em'%3E${encodeURIComponent(text)}%3C/text%3E%3C/svg%3E`;
+    }
+
+    const galleryItems = [
+        {
+            id: 1,
+            title: "Margiela — маски вместо лиц",
+            year: "1990",
+            image: "pictures/margiela_mask.jpg",
+            placeholder: "Margiela 1990",
+            scan: "Показ Martin Margiela SS 1990. Модели вышли на подиум с закрытыми лицами — ткань полностью скрывала головы. Критики назвали это 'боязнью лиц' и 'неуважением к моделям'.",
+            quote: "«Это не мода, это перформанс ради скандала» — пресса"
+        },
+        {
+            id: 2,
+            title: "Comme des Garçons — уродливая красота",
+            year: "1997",
+            image: "pictures/comme.jpg",
+            placeholder: "Comme des Garçons 1997",
+            scan: "Rei Kawakubo показала коллекцию 'Lumps and Bumps' — нарочито деформированные силуэты с подкладками на спинах и плечах. Её обвинили в издевательстве над женским телом.",
+            quote: "«Женщина не должна выглядеть как горбунья» — WWD"
+        },
+        {
+            id: 3,
+            title: "Yohji Yamamoto — священная свадебная традиция",
+            year: "1999",
+            image: "pictures/yohji_hanger.jpg",
+            placeholder: "Yohji Yamamoto 1999",
+            scan: "Это была «свадебная церемония». Показ открывался под «Свадебный марш» Мендельсона, а модели изображали женихов, невест и гостей. Публика сочла это оскорблением и 'смертью театральности'.",
+            quote: "«Где одежда? Это просто клоунада» — зрители"
+        },
+        {
+            id: 4,
+            title: "Alexander McQueen — Highland Rape",
+            year: "1995",
+            image: "pictures/mcqueen_rape.jpg",
+            placeholder: "McQueen 1995",
+            scan: "Коллекция, рассказывающая о травме шотландского народа. Критики обвинили Маккуина в глорификации насилия, хотя это была политическая провокация.",
+            quote: "«Маккуин перешёл все границы» — The Guardian"
+        },
+        {
+            id: 5,
+            title: "Vivienne Westwood — «разграбление» истории моды",
+            year: "1981",
+            image: "pictures/westwood_punk.jpg",
+            placeholder: "Westwood 1981",
+            scan: "Первый показ бренда. Это было безумное, но очень продуманное пиратское карнавальное шоу. Рваные ткани, цепи, золотые зубы. Публика была в шоке.",
+            quote: "«Это конец моды, как мы её знаем» — Daily Mail"
+        },
+        {
+            id: 6,
+            title: "Kiko Kostadinov — инженерный крой",
+            year: "2020",
+            image: "pictures/kiko_engineer.jpg",
+            placeholder: "Kiko Kostadinov 2020",
+            scan: "Коллекцию сочли 'слишком странной' и 'антиженственной'. Через год её техничный крой копировала вся индустрия.",
+            quote: "«Это вообще одежда?» — Instagram-критика"
+        }
+    ];
+
+    function getLiked(itemId) {
+        return localStorage.getItem('liked_' + itemId) === 'true';
+    }
+
+    function setLiked(itemId, liked) {
+        localStorage.setItem('liked_' + itemId, liked);
+    }
+
+    const grid = document.getElementById('galleryGrid');
+    galleryItems.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'gallery-card';
+        const img = document.createElement('img');
+        img.className = 'gallery-image';
+        img.alt = item.title;
+        img.onerror = function() { this.src = getPlaceholderSVG(item.placeholder); };
+        img.src = item.image;
+        card.innerHTML = `
+            <div class="card-info">
+                <div class="card-title">${item.title}</div>
+                <div class="card-year">${item.year}</div>
+            </div>
+        `;
+        card.prepend(img);
+        card.onclick = () => openModal(item);
+        grid.appendChild(card);
+    });
+
+    const modal = document.getElementById('modal');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalYear = document.getElementById('modalYear');
+    const modalScan = document.getElementById('modalScan');
+    const modalQuote = document.getElementById('modalQuote');
+    const modalLike = document.getElementById('modalLike');
+    let currentItem = null;
+
+    function openModal(item) {
+        currentItem = item;
+        modalTitle.innerText = item.title;
+        modalYear.innerText = item.year;
+        modalScan.innerText = item.scan;
+        modalQuote.innerText = item.quote;
+        const isLiked = getLiked(item.id);
+        modalLike.innerText = isLiked ? '❤️ ЛАЙКНУТО' : '♡ ЛАЙК';
+        if (isLiked) {
+            modalLike.classList.add('liked');
+        } else {
+            modalLike.classList.remove('liked');
+        }
+        modal.classList.add('active');
+    }
+
+    modalLike.onclick = () => {
+        if (!currentItem) return;
+        const newLiked = !getLiked(currentItem.id);
+        setLiked(currentItem.id, newLiked);
+        modalLike.innerText = newLiked ? '❤️ ЛАЙКНУТО' : '♡ ЛАЙК';
+        if (newLiked) {
+            modalLike.classList.add('liked');
+        } else {
+            modalLike.classList.remove('liked');
+        }
+    };
+
+    document.getElementById('modalClose').onclick = () => {
+        modal.classList.remove('active');
+    };
+
+    window.onclick = (e) => {
+        if (e.target === modal) modal.classList.remove('active');
+    };
+</script>
+</body>
+</html>

@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Аналитика — HAUTE MESS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1A1A1A;
+            font-family: 'Arial Black', 'Arial', sans-serif;
+        }
+
+        .analytics-page {
+            max-width: 1450px;
+            margin: 0 auto;
+            padding: 60px 20px 40px 20px;
+        }
+
+        /* НАВИГАЦИЯ НАЗАД */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            margin-bottom: 0px;
+            transform: translateY(-30px);
+            position: relative;
+            z-index: 10;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .back-arrow {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .back-text {
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            font-size: 24px;
+            color: #7F7F7F;
+        }
+
+        /* ЗАГОЛОВОК */
+        .analytics-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 60px;
+            margin-bottom: 80px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0px;
+            transform: translateY(-30px); 
+        }
+
+        .analytics-header h1 {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 150px;
+            font-weight: 400;
+            color: #F5F5F0;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 30px;
+        }
+
+        .analytics-sub {
+            font-family: 'Courier Prime', monospace;
+            font-size: 20px;
+            color: #7F7F7F;
+            margin-bottom: 15px;
+            margin-top: 20px; 
+        }
+
+        /* КАРТОЧКИ АНАЛИТИКИ */
+        .analytics-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 80px;
+        }
+
+        .analytics-card {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 60px;
+            align-items: flex-start;
+            border-bottom: 1px solid #333;
+            padding-bottom: 60px;
+        }
+
+        .analytics-card:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        /* ЛЕВАЯ ЧАСТЬ (КАРТИНКА) */
+        .card-image {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .card-img {
+            width: 100%;
+            max-width: 800px;
+            height: auto;
+            display: block;
+            transition: transform 0.3s, opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .card-img:hover {
+            opacity: 0.8;
+            transform: scale(0.98);
+        }
+
+        /* ПРАВАЯ ЧАСТЬ (ТЕКСТ) */
+        .card-content {
+            flex: 1;
+            min-width: 280px;
+        }
+
+        .card-tag {
+            font-family: 'Courier Prime', monospace;
+            font-size: 18px;
+            color: #7F7F7F;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+
+        .card-title {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            color: #F5F5F0;
+            line-height: 1.2;
+            margin-bottom: 25px;
+        }
+
+        .card-description {
+            font-family: 'Courier Prime', monospace;
+            font-size: 18px;
+            color: #C0C0C0;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+
+        .card-link {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 28px;
+            color: #F5F5F0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: opacity 0.3s;
+            border-bottom: 1px solid #F5F5F0;
+            padding-bottom: 5px;
+        }
+
+        .card-link:hover {
+            opacity: 0.7;
+        }
+
+        /* ПАГИНАЦИЯ */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #333;
+        }
+
+        .pagination-link {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 16px;
+            color: #7F7F7F;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0px;
+        }
+
+        .pagination-link:hover {
+            opacity: 0.7;
+            color: #F5F5F0;
+        }
+
+        .pagination-icon {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+        /* АДАПТИВ */
+        @media screen and (max-width: 1200px) {
+            .analytics-header h1 { font-size: 90px; }
+            .card-title { font-size: 40px; }
+        }
+
+        @media screen and (max-width: 900px) {
+            .analytics-page { padding: 40px 20px 80px 20px; }
+            .analytics-header h1 { font-size: 70px; }
+            .analytics-card { gap: 40px; }
+            .card-title { font-size: 36px; }
+            .card-link { font-size: 24px; }
+        }
+
+        @media screen and (max-width: 700px) {
+            .analytics-page { padding: 30px 15px 60px 15px; }
+            .back-link { margin-bottom: 40px; }
+            .back-text { font-size: 18px; }
+            .back-arrow { width: 30px; height: 30px; }
+            .analytics-header { margin-bottom: 50px; }
+            .analytics-header h1 { font-size: 48px; }
+            .analytics-sub { font-size: 16px; }
+            .analytics-grid { gap: 50px; }
+            .analytics-card { gap: 30px; padding-bottom: 40px; }
+            .card-title { font-size: 28px; margin-bottom: 15px; }
+            .card-description { font-size: 16px; }
+            .card-link { font-size: 22px; }
+            .pagination { margin-top: 50px; gap: 20px; }
+            .pagination-link { font-size: 18px; }
+            .pagination-icon { width: 25px; height: 25px; }
+        }
+
+        @media screen and (max-width: 480px) {
+            .analytics-header h1 { font-size: 32px; }
+            .card-title { font-size: 24px; }
+            .card-description { font-size: 14px; }
+            .card-link { font-size: 18px; }
+            .card-tag { font-size: 14px; }
+            .pagination-link { font-size: 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="analytics-page">
+        <!-- ССЫЛКА НАЗАД -->
+        <a href="index.html" class="back-link">
+            <img src="pictures/arrow-back.png" alt="←" class="back-arrow">
+            <span class="back-text">НА ГЛАВНУЮ</span>
+        </a>
+
+        <!-- ЗАГОЛОВОК -->
+        <div class="analytics-header">
+            <div>
+                <h1>АНАЛИТИКА</h1>
+                <div class="analytics-sub">разборы, тренды, влияние</div>
+            </div>
+        </div>
+
+        <!-- СЕТКА АНАЛИТИКИ -->
+        <div class="analytics-grid">
+            <!-- КАРТОЧКА 1 -->
+            <div class="analytics-card">
+                <div class="card-image">
+                    <img src="pictures/analytics1.jpg" alt="Deconstruction" class="card-img">
+                </div>
+                <div class="card-content">
+                    <div class="card-tag">#ДЕКОНСТРУКЦИЯ</div>
+                    <div class="card-title">Разрушение формы как метод</div>
+                    <div class="card-description">Как Мартин Маржела и Рей Кавакубо переосмыслили портновское ремесло, превратив швы и подкладку в главный визуальный код поколения.</div>
+                    <a href="#" class="card-link">ЧИТАТЬ →</a>
+                </div>
+            </div>
+
+            <!-- КАРТОЧКА 2 -->
+            <div class="analytics-card">
+                <div class="card-image">
+                    <img src="pictures/analytics2.jpg" alt="Ugly Beauty" class="card-img">
+                </div>
+                <div class="card-content">
+                    <div class="card-tag">#ЭСТЕТИКА_БЕЗОБРАЗНОГО</div>
+                    <div class="card-title">Уродливое прекрасно</div>
+                    <div class="card-description">Почему «антиженственные» силуэты Comme des Garçons и Yohji Yamamoto сейчас стоят миллионы, а их владельцев называют гениями.</div>
+                    <a href="#" class="card-link">ЧИТАТЬ →</a>
+                </div>
+            </div>
+
+            <!-- КАРТОЧКА 3 -->
+            <div class="analytics-card">
+                <div class="card-image">
+                    <img src="pictures/analytics3.jpg" alt="Anonymous" class="card-img">
+                </div>
+                <div class="card-content">
+                    <div class="card-tag">#АНТИ_ФЕЙС</div>
+                    <div class="card-title">Лицо для маски, а не для логотипа</div>
+                    <div class="card-description">Коллекция Margiela SS 1990 задала тренд на анонимность в индустрии, который спустя 30 лет превратился в инструмент борьбы с нарциссизмом.</div>
+                    <a href="#" class="card-link">ЧИТАТЬ →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ПАГИНАЦИЯ -->
+        <div class="pagination">
+            <a href="archive.html" class="pagination-link">
+                <img src="pictures/arrow-icon.png" alt="←" class="pagination-icon" style="transform: rotate(180deg);">
+                ПРЕДЫДУЩАЯ
+            </a>
+            <a href="research.html" class="pagination-link">
+                СЛЕДУЮЩАЯ
+                <img src="pictures/arrow-icon.png" alt="→" class="pagination-icon">
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Исследования — HAUTE MESS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #1A1A1A;
+            font-family: 'Arial Black', 'Arial', sans-serif;
+        }
+
+        .research-page {
+            max-width: 1450px;
+            margin: 0 auto;
+            padding: 60px 20px 40px 20px;
+        }
+
+        /* НАВИГАЦИЯ НАЗАД */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            margin-bottom: 0px;
+            transform: translateY(-30px);
+            position: relative;
+            z-index: 10;
+        }
+
+        .back-link:hover {
+            opacity: 0.7;
+        }
+
+        .back-arrow {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        .back-text {
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            font-size: 24px;
+            color: #7F7F7F;
+        }
+
+        /* ЗАГОЛОВОК */
+        .research-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            flex-wrap: wrap;
+            gap: 60px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 0px;
+            transform: translateY(-30px);
+        }
+
+        .research-header h1 {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 100px;
+            font-weight: 400;
+            color: #F5F5F0;
+            letter-spacing: -0.02em;
+            line-height: 1;
+            margin-bottom: 30px;
+        }
+
+        .research-sub {
+            font-family: 'Courier Prime', monospace;
+            font-size: 20px;
+            color: #7F7F7F;
+            margin-bottom: 15px;
+            margin-top: 20px;
+        }
+
+        /* СЕТКА ИССЛЕДОВАНИЙ */
+        .research-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+
+        .research-item {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 50px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 50px;
+        }
+
+        .research-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        /* ЛЕВАЯ ЧАСТЬ (ДАТА + ТИП) — прежний шрифт */
+        .research-meta {
+            flex: 0.25;
+            min-width: 160px;
+        }
+
+        .research-date {
+            font-family: 'Courier Prime', monospace;
+            font-size: 18px;
+            color: #7F7F7F;
+            margin-bottom: 8px;
+        }
+
+        .research-tag {
+            font-family: 'Courier Prime', monospace;
+            font-size: 13px;
+            color: #7F7F7F;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* ПРАВАЯ ЧАСТЬ (КОНТЕНТ) */
+        .research-content {
+            flex: 1.5;
+            min-width: 280px;
+        }
+
+        .research-title {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 36px;
+            font-weight: 400;
+            color: #F5F5F0;
+            line-height: 1.2;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .research-title:hover {
+            opacity: 0.8;
+        }
+
+        .research-description {
+            font-family: 'Courier Prime', monospace;
+            font-size: 16px;
+            color: #C0C0C0;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        .research-link {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 20px;
+            color: #F5F5F0;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: opacity 0.3s;
+            border-bottom: 1px solid #F5F5F0;
+            padding-bottom: 4px;
+        }
+
+        .research-link:hover {
+            opacity: 0.7;
+        }
+
+        /* ИЗОБРАЖЕНИЕ СПРАВА */
+        .research-image {
+            flex: 0.6;
+            min-width: 200px;
+        }
+
+        .research-img {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            display: block;
+            transition: opacity 0.3s;
+            cursor: pointer;
+        }
+
+        .research-img:hover {
+            opacity: 0.8;
+        }
+
+        /* БЛОК ГАЛЕРЕИ */
+        .gallery-teaser {
+            text-align: center;
+            margin: 60px 0 40px;
+            padding: 40px 20px;
+            background: #2A2A2A;
+            border-radius: 32px;
+        }
+
+        .gallery-teaser .section-title {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        /* ПАГИНАЦИЯ */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            margin-top: 80px;
+            padding-top: 40px;
+            border-top: 1px solid #333;
+        }
+
+        .pagination-link {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 16px;
+            color: #7F7F7F;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0px;
+        }
+
+        .pagination-link:hover {
+            opacity: 0.7;
+            color: #F5F5F0;
+        }
+
+        .pagination-icon {
+            width: 30px;
+            height: 30px;
+            object-fit: contain;
+        }
+
+        /* АДАПТИВ */
+        @media screen and (max-width: 1200px) {
+            .research-header h1 { font-size: 80px; }
+            .research-title { font-size: 32px; }
+        }
+
+        @media screen and (max-width: 900px) {
+            .research-page { padding: 40px 20px 80px 20px; }
+            .research-header h1 { font-size: 60px; }
+            .research-title { font-size: 28px; }
+            .research-item { gap: 30px; }
+        }
+
+        @media screen and (max-width: 700px) {
+            .research-page { padding: 30px 15px 60px 15px; }
+            .back-link { margin-bottom: 40px; }
+            .back-text { font-size: 18px; }
+            .back-arrow { width: 30px; height: 30px; }
+            .research-header h1 { font-size: 42px; }
+            .research-sub { font-size: 16px; }
+            .research-item { flex-direction: column; gap: 20px; padding-bottom: 35px; }
+            .research-meta { display: flex; justify-content: space-between; width: 100%; }
+            .research-date { font-size: 16px; }
+            .research-title { font-size: 24px; }
+            .research-description { font-size: 14px; }
+            .research-link { font-size: 18px; }
+            .research-img { max-width: 100%; }
+            .pagination-link { font-size: 14px; }
+            .pagination-icon { width: 20px; height: 20px; }
+            .gallery-teaser .section-title { font-size: 28px; }
+            .gallery-teaser a { font-size: 22px !important; }
+        }
+
+        @media screen and (max-width: 480px) {
+            .research-header h1 { font-size: 32px; }
+            .research-title { font-size: 20px; }
+            .research-description { font-size: 13px; }
+            .research-link { font-size: 16px; }
+            .research-date { font-size: 14px; }
+            .research-tag { font-size: 11px; }
+            .gallery-teaser .section-title { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="research-page">
+        <!-- ССЫЛКА НАЗАД -->
+        <a href="index.html" class="back-link">
+            <img src="pictures/arrow-back.png" alt="←" class="back-arrow">
+            <span class="back-text">НА ГЛАВНУЮ</span>
+        </a>
+
+        <!-- ЗАГОЛОВОК -->
+        <div class="research-header">
+            <div>
+                <h1>ИССЛЕДОВАНИЯ</h1>
+                <div class="research-sub">архивы, теория, контекст</div>
+            </div>
+        </div>
+
+        <!-- СЕТКА ИССЛЕДОВАНИЙ (10 УНИКАЛЬНЫХ) -->
+        <div class="research-grid">
+            
+            <!-- 1 -->
+            <div class="research-item">
+                <div class="research-meta">
+                    <div class="research-date">1988</div>
+                    <div class="research-tag">#ФЕНОМЕНОЛОГИЯ</div>
+                </div>
+                <div class="research-content">
+                    <div class="research-title" onclick="location.href='#'">Ткань и память</div>
+                    <div class="research-description">Как первая коллекция Martin Margiela (SS 1989), показанная на пустыре, переопределила отношение к «пережиткам прошлого» в моде — драпировке, потертостям и деконструкции.</div>
+                    <a href="#" class="research-link">СКАЧАТЬ PDF →</a>
+                </div>
+                <div class="research-image">
+                    <img src="pictures/research1.jpg" alt="Margiela 1989" class="research-img" onclick="location.href='#'">
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="research-item">
+                <div class="research-meta">
+                    <div class="research-date">1995</div>
+                    <div class="research-tag">#ИСТОРИЯ_МОДЫ</div>
+                </div>
+                <div class="research-content">
+                    <div class="research-title" onclick="location.href='#'">Атласный бунт</div>
+                    <div class="research-description">Коллекция Alexander McQueen «Highland Rape»: как акт культурной провокации переосмыслил травматичную историю и запустил карьеру «enfant terrible» британской моды.</div>
+                    <a href="#" class="research-link">СКАЧАТЬ PDF →</a>
+                </div>
+                <div class="research-image">
+                    <img src="pictures/research2.jpg" alt="McQueen" class="research-img" onclick="location.href='#'">
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="research-item">
+                <div class="research-meta">
+                    <div class="research-date">2001</div>
+                    <div class="research-tag">#СОЦИОЛОГИЯ</div>
+                </div>
+                <div class="research-content">
+                    <div class="research-title" onclick="location.href='#'">Постирония в швах</div>
+                    <div class="research-description">Почему коллекция Viktor & Rolf «Балет для балерины» высмеяла глянец, но ее владельцы до сих пор не могут продать вещи без скидки.</div>
+                    <a href="#" class="research-link">СКАЧАТЬ PDF →</a>
+                </div>
+                <div class="research-image">
+                    <img src="pictures/research3.jpg" alt="ViktorRolf" class="research-img" onclick="location.href='#'">
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="research-item">
+                <div class="research-meta">
+                    <div class="research-date">2005</div>
+                    <div class="research-tag">#КИНО_И_МОДА</div>
+                </div>
+                <div class="research-content">
+                    <div class="research-title" onclick="location.href='#'">Дьявол в деталях</div>
+                    <div class="research-description">Как фильм «Дьявол носит Prada» изменил восприятие индустрии: исследование влияния поп-культуры на реальные fashion-стратегии после 2006 года.</div>
+                    <a href="#" class="research-link">СКАЧАТЬ PDF →</a>
+                </div>
+                <div class="research-image">
+                    <img src="pictures/research4.jpg" alt="Devil" class="research-img" onclick="location.href='#'">
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="research-item">
+                <div class="research-meta">
+                    <div class="research-date">2009</div>
+                    <div class="research-tag">#ЭСТЕТИКА_КРИЗИСА</div>
+                </div>
+                <div class="research-content">
+                    <div class="research-title" onclick="location.href='#'">Тлен как тренд</div>
+                    <div class="research-description">Коллекция Rodarte «Осень-зима 2009»: как руины и деконструкция отразили экономический коллапс, но разорили бренд на несколько сезонов.</div>
+                    <a href="#" class="research-link">СКАЧАТЬ PDF →</a>
+                </div>
+                <div class="research-image">
+                    <img src="pictures/research5.jpg" alt="Rodarte" class="research-img" onclick="location.href='#'">
+                </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="research-item">
+                <div class="research-meta">
+                    <div class="research-date">2012</div>
+                    <div class="research-tag">#ГЕНДЕР_СТЬЮДИЗ</div>
+                </div>
+                <div class="research-content">
+                    <div class="research-title" onclick="location.href='#'">Андрогиния вне времени</div>
+                    <div class="research-description">Как показ Ann Demeulemeester, где модели меняли костюмы на сцене, зафиксировал поворот к постгендерной моде — и почему критики его не заметили.</div>
+                    <a href="#" class="research-link">СКАЧАТЬ PDF →</a>
+                </div>
+                <div class="research-image">
+                    <img src="pictures/research6.jpg" alt="Demeulemeester" class="research-img" onclick="location.href='#'">
+                </div>
+            </div>
+
+            <!-- 7 -->
+            <div class="research-item">
+                <div class="research-meta">
+                    <div class="research-date">2016</div>
+                    <div class="research-tag">#АРХИВЫ</div>
+                </div>
+                <div class="research-content">
+                    <div class="research-title" onclick="location.href='#'">Стёганый миф</div>
+                    <div class="research-description">История сумки Chanel 2.55: от революционного дизайна 1955 года до тиражирования в коллекциях «а-ля Margiela», которое сочли святотатством.</div>
+                    <a href="#" class="research-link">СКАЧАТЬ PDF →</a>
+                </div>
+                <div class="research-image">
+                    <img src="pictures/research7.jpg" alt="Chanel" class="research-img" onclick="location.href='#'">
+                </div>
+            </div>
+
+            <!-- 8 -->
+            <div class="research-item">
+                <div class="research-meta">
+                    <div class="research-date">2022</div>
+                    <div class="research-tag">#ПЕРФОРМАНС</div>
+                </div>
+                <div class="research-content">
+                    <div class="research-title" onclick="location.href='#'">Жидкое платье</div>
+                    <div class="research-description">Как Coperni на показе SS 2023 прямо на модели Белле Хадид распылили из баллончика жидкость, которая застыла в платье прямо на глазах у публики. Шоу облетело мировые СМИ и соцсети, доказав: одно вирусное событие может заменить многомиллионную рекламную кампанию.</div>
+                    <a href="#" class="research-link">ЧИТАТЬ →</a>
+                </div>
+                <div class="research-image">
+                    <img src="pictures/research8.jpg" alt="Coperni" class="research-img" onclick="location.href='#'">
+                </div>
+            </div>
+
+            <!-- 9 -->
+            <div class="research-item">
+                <div class="research-meta">
+                    <div class="research-date">2023</div>
+                    <div class="research-tag">#ЭТИКА_И_ПРАВА</div>
+                </div>
+                <div class="research-content">
+                    <div class="research-title" onclick="location.href='#'">Платье-договор</div>
+                    <div class="research-description">Юридический разбор: как предложение «надеть контракт на подиум» в коллекции Balenciaga изменило подход брендов к коммерческому праву и PR.</div>
+                    <a href="#" class="research-link">СКАЧАТЬ PDF →</a>
+                </div>
+                <div class="research-image">
+                    <img src="pictures/research9.jpg" alt="Balenciaga" class="research-img" onclick="location.href='#'">
+                </div>
+            </div>
+
+            <!-- 10 -->
+            <div class="research-item">
+                <div class="research-meta">
+                    <div class="research-date">2025</div>
+                    <div class="research-tag">#ФУТУРОЛОГИЯ</div>
+                </div>
+                <div class="research-content">
+                    <div class="research-title" onclick="location.href='#'">Дизайн-антропология</div>
+                    <div class="research-description">Как телесные импланты и биохакерские трикотажные коллекции стирают грань между одеждой и интерфейсом. Карта новых практик 2025 года.</div>
+                    <a href="#" class="research-link">СКАЧАТЬ PDF →</a>
+                </div>
+                <div class="research-image">
+                    <img src="pictures/research10.jpg" alt="Biohacking" class="research-img" onclick="location.href='#'">
+                </div>
+            </div>
+        </div>
+
+        <!-- ГАЛЕРЕЯ «ЗАПРЕЩЁННЫЕ ОБРАЗЫ» -->
+        <div class="gallery-teaser">
+            <div class="section-title">📸 ЗАПРЕЩЁННЫЕ ОБРАЗЫ</div>
+            <div class="description" style="margin-bottom: 20px; color: #C0C0C0; font-family: 'Courier Prime', monospace;">Коллекции, которые сначала осмеяли, а потом признали гениальными.</div>
+            <a href="gallery.html" class="research-link" style="font-size: 28px;">СМОТРЕТЬ ГАЛЕРЕЮ →</a>
+        </div>
+
+        <!-- ПАГИНАЦИЯ -->
+        <div class="pagination">
+            <a href="analytics.html" class="pagination-link">
+                <img src="pictures/arrow-icon.png" alt="←" class="pagination-icon" style="transform: rotate(180deg);">
+                ПРЕДЫДУЩАЯ
+            </a>
+            <a href="column.html" class="pagination-link">
+                СЛЕДУЮЩАЯ
+                <img src="pictures/arrow-icon.png" alt="→" class="pagination-icon">
+            </a>
+        </div>
+    </div>
+</body>
+</html>

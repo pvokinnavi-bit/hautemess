@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генератор — HAUTE MESS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background: #1A1A1A; font-family: 'Arial Black', sans-serif; }
+        .page { max-width: 1000px; margin: 40px auto; padding: 0 20px; text-align: center; }
+        .back-link { display: inline-flex; align-items: center; gap: 10px; color: #7F7F7F; text-decoration: none; margin-bottom: 40px; font-family: 'Courier Prime', monospace; }
+        .back-link:hover { opacity: 0.7; }
+        h1 { font-size: 70px; color: #F5F5F0; margin-bottom: 30px; }
+        .outfit { background: #2A2A2A; padding: 40px; border-radius: 32px; margin: 30px 0; }
+        .outfit-name { font-size: 36px; font-family: 'Courier Prime', monospace; color: #00ffcc; margin-bottom: 20px; }
+        .item-list { font-size: 20px; color: #ccc; margin: 15px 0; }
+        button { background: #F5F5F0; border: none; padding: 15px 40px; border-radius: 60px; font-size: 20px; font-family: 'Arial Black'; cursor: pointer; margin: 20px; transition: 0.2s; }
+        button:hover { transform: scale(1.02); background: #00ffcc; }
+        .favorite-btn { background: #333; color: #F5F5F0; padding: 10px 20px; font-size: 16px; }
+        .saved-outfits { margin-top: 40px; padding-top: 30px; border-top: 1px solid #333; }
+        .saved-list { display: flex; flex-wrap: wrap; gap: 15px; justify-content: center; margin-top: 20px; }
+        .saved-item { background: #2A2A2A; padding: 10px 20px; border-radius: 40px; font-family: 'Courier Prime'; font-size: 14px; display: flex; align-items: center; gap: 10px; }
+        .saved-item button { background: none; border: none; color: #ff4444; cursor: pointer; font-size: 16px; margin: 0; padding: 0; }
+        @media (max-width: 700px) { h1 { font-size: 48px; } .outfit-name { font-size: 24px; } .item-list { font-size: 16px; } }
+    </style>
+</head>
+<body>
+<div class="page">
+    <a href="index.html" class="back-link">← НА ГЛАВНУЮ</a>
+    <h1>СЛОМАЙ СИЛУЭТ</h1>
+    <button id="generate">СМЕШАТЬ</button>
+    <div class="outfit" id="outfit"></div>
+    <button id="saveFavorite" class="favorite-btn">⭐ СОХРАНИТЬ В ИЗБРАННОЕ</button>
+    <div class="saved-outfits">
+        <h3 style="color:#F5F5F0; font-size:20px;">ИЗБРАННЫЕ АУТФИТЫ</h3>
+        <div class="saved-list" id="savedList"></div>
+    </div>
+</div>
+<script>
+    const tops = ["Огромный пиджак", "Корсет поверх футболки", "Сетка", "Неоновая майка", "Бомбер с принтом"];
+    const bottoms = ["Широкие штаны", "Юбка поверх джинсов", "Леггинсы с вырезами", "Парка вместо низа", "Карго"];
+    const acc = ["Маска", "Балаклава", "Очки-консервы", "Перчатки без пальцев", "Чокер с шипами"];
+    let currentOutfit = {};
+
+    function random(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    function generate() {
+        currentOutfit = { top: random(tops), bottom: random(bottoms), accessory: random(acc) };
+        const name = `${currentOutfit.top} + ${currentOutfit.bottom} + ${currentOutfit.accessory}`;
+        document.getElementById('outfit').innerHTML = `
+            <div class="outfit-name">${name}</div>
+            <div class="item-list">🔥 Твой дерзкий лук на сегодня</div>
+            <div class="item-list">🎭 Правило одно: не носи чужую форму</div>
+        `;
+    }
+    function loadSaved() {
+        const saved = JSON.parse(localStorage.getItem('saved_outfits') || '[]');
+        const container = document.getElementById('savedList');
+        container.innerHTML = saved.map((item, idx) => `
+            <div class="saved-item">
+                ${item.top} + ${item.bottom} + ${item.accessory}
+                <button onclick="removeSaved(${idx})">✕</button>
+            </div>
+        `).join('');
+    }
+    function saveFavorite() {
+        if (!currentOutfit.top) return;
+        const saved = JSON.parse(localStorage.getItem('saved_outfits') || '[]');
+        saved.push(currentOutfit);
+        localStorage.setItem('saved_outfits', JSON.stringify(saved));
+        loadSaved();
+        alert('Аутфит сохранён в избранное!');
+    }
+    function removeSaved(idx) {
+        const saved = JSON.parse(localStorage.getItem('saved_outfits') || '[]');
+        saved.splice(idx, 1);
+        localStorage.setItem('saved_outfits', JSON.stringify(saved));
+        loadSaved();
+    }
+    generate();
+    loadSaved();
+    document.getElementById('generate').onclick = generate;
+    document.getElementById('saveFavorite').onclick = saveFavorite;
+    window.removeSaved = removeSaved;
+</script>
+</body>
+</html>

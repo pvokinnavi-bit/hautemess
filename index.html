@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>HAUTE MESS</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Coming+Soon&family=Courier+Prime&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #1A1A1A;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .frame {
+            width: 100%;
+            max-width: 1450px;
+            background-color: #1A1A1A;
+            position: relative;
+            margin: 0 auto;
+        }
+        
+        /* МЕНЮ */
+        .top-menu {
+            width: 100%;
+            height: 70px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #1A1A1A;
+        }
+        
+        .menu-content {
+            width: 100%;
+            max-width: 1415px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-left: 5px;
+            padding-right: 5px;
+            font-family: 'Comme', sans-serif;
+            font-size: 36px;
+            font-weight: 400;
+            line-height: 1.2;
+            color: #ffffff;
+            white-space: nowrap;
+        }
+        
+        .menu-content a {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity 0.2s;
+        }
+        
+        .menu-content a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        /* ГЕРОЙ */
+        .hero {
+            position: relative;
+            width: 100%;
+        }
+        
+        .hero img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .hero-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            color: #F5F5F0;
+            pointer-events: none;
+        }
+        
+        .main-title {
+            font-family: 'Arial', sans-serif;
+            font-weight: 400;
+            font-size: 170px;
+            color: #F5F5F0;
+            text-transform: uppercase;
+            line-height: 1;
+            letter-spacing: -0.02em;
+            text-align: center;
+            white-space: nowrap;
+            position: absolute;
+            top: 708px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-100%);
+            margin: 0;
+            z-index: 10;
+        }
+        
+        .sub-line {
+            font-family: 'Courier Prime', monospace;
+            font-weight: 400;
+            font-size: 48px;
+            color: #F5F5F0;
+            text-align: center;
+            line-height: 1.3;
+            position: absolute;
+            top: calc(708px + 80px);
+            left: 50%;
+            transform: translateX(-50%) translateY(-100%);
+            margin: 0;
+            white-space: nowrap;
+            max-width: 90%;
+            z-index: 10;
+        }
+        
+        .profile-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 87px;
+            height: 123px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 20;
+            pointer-events: auto;
+        }
+        
+        /* ПОИСК */
+        .search-section {
+            width: 100%;
+            background-color: #1A1A1A;
+            padding: 0px 0 10px 0;
+            margin-top: 0px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .search-container {
+            width: 100%;
+            max-width: 1415px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 0 5px;
+        }
+        
+        .search-icon {
+            width: 84px;
+            height: 82px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            flex-shrink: 0;
+        }
+        
+        .search-bar {
+            flex: 1;
+            height: 56px;
+            background-color: #F5F5F0;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0 25px;
+        }
+        
+        .search-input {
+            width: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Comme', sans-serif;
+            font-size: 40px;
+            font-weight: 400;
+            color: #1A1A1A;
+            line-height: 1;
+        }
+        
+        .search-input::placeholder {
+            color: #7F7F7F;
+            opacity: 0.8;
+        }
+        
+        /* ФИЛЬТРЫ */
+        .filters-section {
+            width: 100%;
+            background-color: #1A1A1A;
+            padding: 5px 0 30px 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .filters-container {
+            width: 100%;
+            max-width: 1415px;
+            padding: 0 5px;
+        }
+        
+        .filters-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+            padding-left: 0px;
+        }
+        
+        .filters-icon {
+            width: 51px;
+            height: 40px;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            flex-shrink: 0;
+            margin-left: 80px;
+            margin-right: -50px;
+        }
+        
+        .filters-title {
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            color: #7F7F7F;
+            line-height: 1.2;
+            margin-left: 50px;
+        }
+        
+        .filters-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            padding-left: 453px;
+        }
+        
+        .filter-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            width: auto;
+            min-width: 300px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        
+        .filter-item:hover {
+            opacity: 0.8;
+        }
+        
+        .filter-item:hover .filter-name {
+            text-decoration: underline;
+        }
+        
+        .filter-item-right {
+            justify-content: flex-start;
+            padding-left: 100px;
+        }
+        
+        .filter-item-left {
+            justify-content: flex-start;
+            padding-left: 0;
+        }
+        
+        .first-filter {
+            padding-left: 98px !important;
+        }
+        
+        .filter-marker {
+            width: 22px;
+            height: 22px;
+            background-color: #7F7F7F;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+        
+        .filter-name {
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            font-size: 48px;
+            font-weight: 400;
+            color: #7F7F7F;
+            line-height: 1.2;
+        }
+        
+        /* ШТАМПЫ */
+        .stamps-section {
+            background-color: #1A1A1A;
+            padding: 0px 0 60px 0;
+            max-width: 1415px;
+            margin: 0 auto;
+            padding-left: 20px;
+        }
+        
+        .stamps-wrapper {
+            display: flex;
+            gap: 40px;
+            align-items: flex-start;
+        }
+        
+        .stamps-title {
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            font-size: 64px;
+            font-weight: 400;
+            color: #7F7F7F;
+            white-space: nowrap;
+            line-height: 1;
+        }
+        
+        .stamps-right {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .stamps-row {
+            display: flex;
+            gap: 30px;
+        }
+        
+        /* ИНФОРМАЦИОННАЯ СЕКЦИЯ */
+        .info-section {
+            width: 100%;
+            background-color: #1A1A1A;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .info-container {
+            position: relative;
+            width: 100%;
+            max-width: 1450px;
+            margin: 0 auto;
+            line-height: 0;
+        }
+        
+        .info-image {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        
+        .info-text {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            max-width: 1300px;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 40px;
+            color: #F5F5F0;
+            line-height: 1.3;
+            text-align: justify;
+            text-align-last: justify;
+            padding: 0 40px;
+            z-index: 10;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        
+        /* ПОДВАЛ */
+        .footer {
+            width: 100%;
+            background-color: #1A1A1A;
+            padding: 80px 0 60px 0;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .footer-container {
+            width: 100%;
+            max-width: 1415px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        
+        .footer-left {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .footer-right {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .footer-spacer {
+            height: 40px;
+        }
+        
+        .footer-link {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 24px;
+            color: #F5F5F0;
+            text-decoration: none;
+            transition: opacity 0.2s;
+            display: inline-block;
+        }
+        
+        .footer-link:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
+        
+        .footer-link:visited {
+            color: #F5F5F0;
+        }
+        
+        /* ПОДВАЛ (продолжение) */
+        .footer-bottom {
+            width: 100%;
+            background-color: #1A1A1A;
+            padding: 20px 0 30px 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-line {
+            width: 100%;
+            max-width: 1450px;
+            height: 1px;
+            background-color: #FFFFFF;
+            margin-bottom: 20px;
+        }
+        
+        .footer-bottom-container {
+            width: 100%;
+            max-width: 1415px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            margin-bottom: 20px;
+        }
+        
+        .footer-copyright,
+        .footer-rights {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 20px;
+            color: #F5F5F0;
+        }
+        
+        .footer-brand {
+            font-family: 'Arial Black', 'Arial', sans-serif;
+            font-weight: 400;
+            font-size: 48px;
+            color: #F5F5F0;
+            text-align: center;
+            width: 100%;
+            padding: 0 20px;
+        }
+        
+                     /* ===== АДАПТИВ ДЛЯ ПЛАНШЕТОВ ===== */
+        @media screen and (max-width: 1200px) {
+            .main-title { font-size: 120px !important; top: 550px !important; }
+            .sub-line { font-size: 36px !important; top: calc(550px + 20px) !important; }
+            .filters-header, .filters-grid { padding-left: 300px !important; }
+            .filter-item-right { padding-left: 80px !important; }
+            .first-filter { padding-left: 78px !important; }
+            .filters-title, .filter-name { font-size: 42px !important; }
+            .info-text { font-size: 32px !important; }
+        }
+        
+        @media screen and (max-width: 1000px) {
+            .menu-content { font-size: 28px; flex-wrap: wrap; gap: 15px; justify-content: center; }
+            .top-menu { height: auto; padding: 10px 0; }
+            .main-title { font-size: 90px !important; top: 450px !important; }
+            .sub-line { font-size: 28px !important; top: calc(450px + 15px) !important; }
+            .search-icon { width: 70px; height: 68px; }
+            .search-bar { height: 48px; }
+            .search-input { font-size: 32px; }
+            .filters-header, .filters-grid { padding-left: 200px !important; }
+            .filter-item-right { padding-left: 60px !important; }
+            .first-filter { padding-left: 58px !important; }
+            .filters-title, .filter-name { font-size: 36px !important; }
+            .info-text { font-size: 28px !important; }
+        }
+        
+        @media screen and (max-width: 850px) {
+            .main-title { font-size: 70px !important; top: 350px !important; }
+            .sub-line { font-size: 24px !important; top: calc(350px + 12px) !important; }
+            .stamps-wrapper { flex-direction: column; align-items: flex-start; }
+            .stamps-title { font-size: 40px; }
+            .footer-container { flex-direction: column; gap: 30px; align-items: center; text-align: center; }
+            .footer-bottom-container { flex-direction: column; gap: 10px; text-align: center; }
+        }
+        
+        /* ===== МОБИЛЬНАЯ ВЕРСИЯ (700px) ===== */
+        @media screen and (max-width: 700px) {
+            .main-title {
+                font-size: 42px !important;
+                top: 280px !important;
+                white-space: normal !important;
+                width: 90%;
+            }
+            .sub-line {
+                font-size: 16px !important;
+                top: calc(280px + 40px) !important;
+                white-space: normal !important;
+                width: 85%;
+            }
+            .profile-icon {
+                width: 40px !important;
+                height: 56px !important;
+                top: 5px !important;
+                right: 5px !important;
+            }
+            .filters-header {
+                padding-left: 15px !important;
+            }
+            .filters-grid {
+                padding-left: 15px !important;
+            }
+            .filters-title {
+                font-size: 22px !important;
+            }
+            .filter-name {
+                font-size: 18px !important;
+            }
+            .filter-marker {
+                width: 16px !important;
+                height: 16px !important;
+            }
+            .stamps-section {
+                padding-left: 15px !important;
+                padding-right: 15px;
+                overflow-x: hidden;
+            }
+            .stamps-wrapper {
+                flex-direction: column;
+                gap: 20px;
+            }
+            .stamps-title {
+                font-size: 28px;
+            }
+            .stamps-row {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+            }
+            .stamp-1, .stamp-2, .stamp-3, .stamp-4 {
+                width: 48% !important;
+                height: auto !important;
+            }
+            .info-text {
+                font-size: 14px !important;
+                bottom: 10px;
+                padding: 0 10px;
+                width: 95%;
+            }
+            .footer-container {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+            }
+            .footer-left, .footer-right {
+                align-items: center;
+            }
+            .footer-link {
+                font-size: 14px;
+            }
+            .footer-brand {
+                font-size: 22px;
+            }
+            .daily-chaos {
+                bottom: 10px;
+                right: 10px;
+                font-size: 11px;
+                padding: 6px 12px;
+                max-width: 200px;
+            }
+        }
+        
+        /* ===== МОБИЛЬНАЯ ВЕРСИЯ (480px) ===== */
+        @media screen and (max-width: 480px) {
+            .main-title {
+                font-size: 32px !important;
+                top: 240px !important;
+            }
+            .sub-line {
+                font-size: 13px !important;
+                top: calc(240px + 30px) !important;
+                width: 85%;
+            }
+            .profile-icon {
+                width: 35px !important;
+                height: 50px !important;
+            }
+            .filters-title {
+                font-size: 20px !important;
+            }
+            .filter-name {
+                font-size: 16px !important;
+            }
+            .filter-marker {
+                width: 12px !important;
+                height: 12px !important;
+            }
+            .stamps-title {
+                font-size: 24px;
+            }
+            .stamp-1, .stamp-2, .stamp-3, .stamp-4 {
+                width: 100% !important;
+                max-width: 180px;
+            }
+            .info-text {
+                font-size: 11px !important;
+                padding: 0 8px;
+            }
+            .footer-link {
+                font-size: 12px;
+            }
+            .footer-brand {
+                font-size: 18px;
+            }
+            .daily-chaos {
+                font-size: 9px;
+                padding: 5px 10px;
+                max-width: 180px;
+            }
+        }
+       
+    </style>
+</head>
+<body>
+    <div class="frame">
+        <!-- МЕНЮ -->
+        <nav class="top-menu">
+            <div class="menu-content">
+                <a href="archive.html">Архив</a>
+                <a href="analytics.html">Аналитика</a>
+                <a href="research.html">Исследования</a>
+                <a href="column.html">Колонка</a>
+                <a href="community.html">Сообщество</a>
+                <a href="about.html">О проекте</a>
+            </div>
+        </nav>
+        
+        <!-- ГЕРОЙ -->
+        <div class="hero" style="margin-bottom: 20px;">
+            <img src="pictures/fingers.jpg" alt="">
+            <div class="hero-content">
+                <h1 class="main-title">HAUTE MESS</h1>
+                <div class="sub-line">Genius is never understood at first sight</div>
+                <a href="#" class="profile-link">
+                <div class="profile-icon" style="background-image: url('pictures/profilelogo.png');">
+                </div>
+                </a>
+        </div>
+        
+        <!-- ПОИСК -->
+        <div class="search-section">
+            <div class="search-container">
+                <div class="search-icon" style="background-image: url('pictures/searchh.png');"></div>
+                <div class="search-bar">
+                    <input type="text" class="search-input" placeholder="Поиск">
+                </div>
+            </div>
+        </div>
+        
+        <!-- ФИЛЬТРЫ -->
+        <div class="filters-section">
+            <div class="filters-container">
+                <div class="filters-header">
+                    <div class="filters-icon" style="background-image: url('pictures/linessss.png');"></div>
+                    <span class="filters-title">Фильтровать по:</span>
+                </div>
+                <div class="filters-grid">
+                    <a href="#" class="filter-item filter-item-right first-filter">
+                        <div class="filter-marker"></div>
+                        <span class="filter-name">ДИЗАЙНЕР</span>
+                    </a>
+                    <a href="#" class="filter-item filter-item-left">
+                        <div class="filter-marker"></div>
+                        <span class="filter-name">БРЕНД</span>
+                    </a>
+                    <a href="#" class="filter-item filter-item-right">
+                        <div class="filter-marker"></div>
+                        <span class="filter-name">КОЛЛЕКЦИЯ</span>
+                    </a>
+                    <a href="#" class="filter-item filter-item-left">
+                        <div class="filter-marker"></div>
+                        <span class="filter-name">СЕЗОН</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ШТАМПЫ -->
+        <div class="stamps-section">
+            <div class="stamps-wrapper">
+                <span class="stamps-title">ШТАМП:</span>
+                <div class="stamps-right">
+                    <div class="stamps-row">
+                        <div class="stamp-1">
+                            <a href="#" class="stamp-link" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                                <img src="pictures/cult.png" alt="Штамп 1" class="stamp-img">
+                            </a>
+                        </div>
+                        <div class="stamp-3">
+                            <a href="#" class="stamp-link" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                                <img src="pictures/genius.png" alt="Штамп 3" class="stamp-img">
+                            </a>
+                        </div>
+                    </div>
+                    <div class="stamps-row">
+                        <div class="stamp-2">
+                            <a href="#" class="stamp-link" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                                <img src="pictures/banned.png" alt="Штамп 2" class="stamp-img">
+                            </a>
+                        </div>
+                        <div class="stamp-4">
+                            <a href="#" class="stamp-link" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                                <img src="pictures/scandal.png" alt="Штамп 4" class="stamp-img">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ИНФОРМАЦИОННАЯ СЕКЦИЯ -->
+        <div class="info-section">
+            <div class="info-container">
+                <img src="pictures/elevator.JPG" alt="Информационное изображение" class="info-image">
+                <div class="info-text">
+                    Сбор, каталогизация и анализ экстравагантных, провокационных и опережающих время коллекций, которые изначально были осмеяны критиками и публикой, но позже были признаны истинными шедеврами, повлиявшими на всю индустрию моды.
+                </div>
+            </div>
+        </div>
+        
+        <!-- ПОДВАЛ -->
+        <div class="footer">
+            <div class="footer-container">
+                <div class="footer-left">
+                    <a href="#" class="footer-link">REGISTER</a>
+                    <a href="#" class="footer-link">LOGIN</a>
+                    <a href="#" class="footer-link">MY PAGE</a>
+                    <div class="footer-spacer"></div>
+                    <a href="#" class="footer-link">FOLLOW US</a>
+                </div>
+                <div class="footer-right">
+                    <a href="#" class="footer-link">COMPANY PROFILE</a>
+                    <a href="#" class="footer-link">TERMS OF SERVICE</a>
+                    <a href="#" class="footer-link">LEGAL NOTICE</a>
+                    <a href="#" class="footer-link">PRIVACY POLICY</a>
+                    <a href="#" class="footer-link">ABOUT HAUTE MESS</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- ПОДВАЛ (продолжение) -->
+        <div class="footer-bottom">
+            <div class="footer-line"></div>
+            <div class="footer-bottom-container">
+                <span class="footer-copyright">@2026 HAUTE MESS</span>
+                <span class="footer-rights">Do Not Sell or Share My Personal Information</span>
+            <a href="404.html" class="footer-rights" style="text-decoration: underline; cursor: pointer;">ТЕСТ СТРАНИЦЫ 404</a>
+            </div>
+            <div class="footer-brand">HAUTE MESS</div>
+        </div>
+        
+    </div> <!-- закрытие frame -->
+        
+    </script>
+</body>
+</html>
