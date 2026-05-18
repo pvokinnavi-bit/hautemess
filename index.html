@@ -510,14 +510,14 @@
         /* ===== МОБИЛЬНАЯ ВЕРСИЯ (700px) ===== */
         @media screen and (max-width: 700px) {
             .main-title {
-                font-size: 42px !important;
-                top: 200px !important;
+                font-size: 36px !important;
+                top: 140px !important;
                 white-space: normal !important;
                 width: 90%;
             }
             .sub-line {
-                font-size: 16px !important;
-                top: calc(200px + 35px) !important;
+                font-size: 14px !important;
+                top: calc(140px + 30px) !important;
                 white-space: normal !important;
                 width: 85%;
             }
@@ -597,11 +597,11 @@
         @media screen and (max-width: 480px) {
             .main-title {
                 font-size: 32px !important;
-                top: 240px !important;
+                top: 180px !important;
             }
             .sub-line {
                 font-size: 13px !important;
-                top: calc(240px + 30px) !important;
+                top: calc(180px + 25px) !important;
                 width: 85%;
             }
             .profile-icon {
@@ -640,6 +640,24 @@
                 padding: 5px 10px;
                 max-width: 180px;
             }
+                    /* СПЕЦИАЛЬНО ДЛЯ МАЛЕНЬКИХ ЭКРАНОВ (iPhone SE / старые iPhone) */
+        @media screen and (max-width: 400px) {
+            .main-title {
+                font-size: 32px !important;
+                top: 160px !important;
+            }
+            .sub-line {
+                font-size: 13px !important;
+                top: calc(160px + 30px) !important;
+                width: 92% !important;
+            }
+            .profile-icon {
+                width: 35px !important;
+                height: 50px !important;
+                top: 5px !important;
+                right: 5px !important;
+            }
+        }
         }
        
     </style>
